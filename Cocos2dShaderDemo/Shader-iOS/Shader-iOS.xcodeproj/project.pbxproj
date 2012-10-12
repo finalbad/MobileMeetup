@@ -181,6 +181,9 @@
 		79EC255216284492005F597D /* GLES-Render.mm in Sources */ = {isa = PBXBuildFile; fileRef = 79EC255116284492005F597D /* GLES-Render.mm */; };
 		79EC255516284492005F597D /* PhysicsSprite.mm in Sources */ = {isa = PBXBuildFile; fileRef = 79EC255416284492005F597D /* PhysicsSprite.mm */; };
 		79EC255716284492005F597D /* blocks.png in Resources */ = {isa = PBXBuildFile; fileRef = 79EC255616284492005F597D /* blocks.png */; };
+		79EC256316284871005F597D /* HDJGrayscaleShader.m in Sources */ = {isa = PBXBuildFile; fileRef = 79EC256216284871005F597D /* HDJGrayscaleShader.m */; };
+		79EC256716284A93005F597D /* FV-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 79EC256516284A93005F597D /* FV-hd.png */; };
+		79EC256816284A93005F597D /* FV.png in Resources */ = {isa = PBXBuildFile; fileRef = 79EC256616284A93005F597D /* FV.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -545,6 +548,10 @@
 		79EC255316284492005F597D /* PhysicsSprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhysicsSprite.h; sourceTree = "<group>"; };
 		79EC255416284492005F597D /* PhysicsSprite.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PhysicsSprite.mm; sourceTree = "<group>"; };
 		79EC255616284492005F597D /* blocks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blocks.png; path = Resources/blocks.png; sourceTree = "<group>"; };
+		79EC256116284871005F597D /* HDJGrayscaleShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDJGrayscaleShader.h; sourceTree = "<group>"; };
+		79EC256216284871005F597D /* HDJGrayscaleShader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDJGrayscaleShader.m; sourceTree = "<group>"; };
+		79EC256516284A93005F597D /* FV-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "FV-hd.png"; path = "Resources/FV-hd.png"; sourceTree = "<group>"; };
+		79EC256616284A93005F597D /* FV.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FV.png; path = Resources/FV.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -605,16 +612,18 @@
 			children = (
 				79EC254716284492005F597D /* AppDelegate.h */,
 				79EC254816284492005F597D /* AppDelegate.mm */,
+				79EC255016284492005F597D /* GLES-Render.h */,
+				79EC255116284492005F597D /* GLES-Render.mm */,
+				79EC256116284871005F597D /* HDJGrayscaleShader.h */,
+				79EC256216284871005F597D /* HDJGrayscaleShader.m */,
 				79EC254A16284492005F597D /* HelloWorldLayer.h */,
 				79EC254B16284492005F597D /* HelloWorldLayer.mm */,
 				79EC254D16284492005F597D /* IntroLayer.h */,
 				79EC254E16284492005F597D /* IntroLayer.mm */,
-				79EC255016284492005F597D /* GLES-Render.h */,
-				79EC255116284492005F597D /* GLES-Render.mm */,
+				79EC23571628448E005F597D /* libs */,
 				79EC255316284492005F597D /* PhysicsSprite.h */,
 				79EC255416284492005F597D /* PhysicsSprite.mm */,
 				79EC233D1628448D005F597D /* Resources */,
-				79EC23571628448E005F597D /* libs */,
 				79EC254316284492005F597D /* Supporting Files */,
 			);
 			path = "Shader-iOS";
@@ -623,6 +632,8 @@
 		79EC233D1628448D005F597D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				79EC256516284A93005F597D /* FV-hd.png */,
+				79EC256616284A93005F597D /* FV.png */,
 				79EC233E1628448D005F597D /* Default.png */,
 				79EC23401628448D005F597D /* Default-Landscape~ipad.png */,
 				79EC23421628448D005F597D /* fps_images.png */,
@@ -1206,6 +1217,8 @@
 				79EC23561628448E005F597D /* iTunesArtwork in Resources */,
 				79EC249416284490005F597D /* ChangeLog in Resources */,
 				79EC255716284492005F597D /* blocks.png in Resources */,
+				79EC256716284A93005F597D /* FV-hd.png in Resources */,
+				79EC256816284A93005F597D /* FV.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1367,6 +1380,7 @@
 				79EC254F16284492005F597D /* IntroLayer.mm in Sources */,
 				79EC255216284492005F597D /* GLES-Render.mm in Sources */,
 				79EC255516284492005F597D /* PhysicsSprite.mm in Sources */,
+				79EC256316284871005F597D /* HDJGrayscaleShader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1472,6 +1486,7 @@
 				79EC255C16284492005F597D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

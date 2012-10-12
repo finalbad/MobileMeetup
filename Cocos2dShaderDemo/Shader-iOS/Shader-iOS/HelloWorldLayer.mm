@@ -73,8 +73,8 @@ enum {
 #endif
 		[self addChild:parent z:0 tag:kTagParentNode];
 		
-		
-		[self addNewSpriteAtPosition:ccp(s.width/2, s.height/2)];
+//		
+//		[self addNewSpriteAtPosition:ccp(s.width/2, s.height/2)];
 		
 		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Tap screen" fontName:@"Marker Felt" fontSize:32];
 		[self addChild:label z:0];
@@ -99,51 +99,62 @@ enum {
 
 -(void) createMenu
 {
-	// Default font size will be 22 points.
-	[CCMenuItemFont setFontSize:22];
+
+    UIImage *image = [UIImage imageNamed:@"FV.png"];
+    CCTexture2D *texture = [[CCTextureCache sharedTextureCache] addCGImage:image.CGImage forKey:@"FV.png"];
+    CGSize size = image.size;
+    
+    CGRect frame = UIScreen.mainScreen.bounds;
+//    CGPoint p = ccp(size.width/2.0 + 5, size.height/2.0 + 5);
+    CGPoint p = ccp(frame.size.width/2.0, frame.size.height/2.0);
+	NSLog(@"width: %f, height: %f", size.width, size.height);
+    CCLOG(@"Add sprite %0.2f x %02.f",p.x,p.y);
+	CCNode *parent = [self getChildByTag:kTagParentNode];
 	
-	// Reset Button
-	CCMenuItemLabel *reset = [CCMenuItemFont itemWithString:@"Reset" block:^(id sender){
-		[[CCDirector sharedDirector] replaceScene: [HelloWorldLayer scene]];
-	}];
+    
+    CGFloat scale = [CCDirector sharedDirector].contentScaleFactor;
+    
+	//We have a 64x64 sprite sheet with 4 different 32x32 images.  The following code is
+	//just randomly picking one of the images
+	PhysicsSprite *sprite = [PhysicsSprite spriteWithTexture:texture rect:(CGRect){0, 0, size.width / CC_CONTENT_SCALE_FACTOR(), size.height / CC_CONTENT_SCALE_FACTOR()}];
+	[parent addChild:sprite];
 	
-	// Achievement Menu Item using blocks
-	CCMenuItem *itemAchievement = [CCMenuItemFont itemWithString:@"Achievements" block:^(id sender) {
-		
-		
-		GKAchievementViewController *achivementViewController = [[GKAchievementViewController alloc] init];
-		achivementViewController.achievementDelegate = self;
-		
-		AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-		
-		[[app navController] presentModalViewController:achivementViewController animated:YES];
-		
-		[achivementViewController release];
-	}];
+	sprite.position = ccp(p.x, p.y);
 	
-	// Leaderboard Menu Item using blocks
-	CCMenuItem *itemLeaderboard = [CCMenuItemFont itemWithString:@"Leaderboard" block:^(id sender) {
-		
-		
-		GKLeaderboardViewController *leaderboardViewController = [[GKLeaderboardViewController alloc] init];
-		leaderboardViewController.leaderboardDelegate = self;
-		
-		AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-		
-		[[app navController] presentModalViewController:leaderboardViewController animated:YES];
-		
-		[leaderboardViewController release];
-	}];
+	// Define the dynamic body.
+	//Set up a 1m squared box in the physics world
+	b2BodyDef bodyDef;
+	bodyDef.type = b2_dynamicBody;
+	bodyDef.position.Set(p.x/PTM_RATIO, p.y/PTM_RATIO);
+	b2Body *body = world->CreateBody(&bodyDef);
+	   
+	// Define another box shape for our dynamic body.
+	b2PolygonShape dynamicBox;
+//	dynamicBox.SetAsBox(size.width / PTM_RATIO, size.width / PTM_RATIO);//These are mid points for our 1m box
 	
-	CCMenu *menu = [CCMenu menuWithItems:itemAchievement, itemLeaderboard, reset, nil];
+//    dynamicBox.SetAsBox(0.5, 0.5);
+  
+    float hx = (size.width) / (PTM_RATIO * scale * 2);
+    float hy = (size.height) / (PTM_RATIO * scale * 2);
+    
+//    float hx = 1.0;
+//    float hy = 1.0;
+    
+	NSLog(@"hx: %f, hy: %f, scale: %f", hx, hy, scale);
+    
+    dynamicBox.SetAsBox(hx, hy);
+	b2FixtureDef fixtureDef;
+	fixtureDef.shape = &dynamicBox;	
+	fixtureDef.density = 1.0f;
+	fixtureDef.friction = 0.3f;
+	body->CreateFixture(&fixtureDef);
 	
-	[menu alignItemsVertically];
-	
-	CGSize size = [[CCDirector sharedDirector] winSize];
-	[menu setPosition:ccp( size.width/2, size.height/2)];
-	
-	
-	[self addChild: menu z:-1];	
+	[sprite setPhysicsBody:body];
+    
+    
+    
+    
+    [self addChild:sprite];
 }
 
 -(void) initPhysics
