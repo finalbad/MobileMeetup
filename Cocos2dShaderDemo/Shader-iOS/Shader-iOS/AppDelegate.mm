@@ -30,13 +30,14 @@
 									sharegroup:nil
 								 multiSampling:YES
 							   numberOfSamples:4];
-
+    glView.frame = [[UIScreen mainScreen] bounds];
+    glView.bounds = [[UIScreen mainScreen] bounds];
 	// Enable multiple touches
 	[glView setMultipleTouchEnabled:YES];
 
 	director_ = (CCDirectorIOS*) [CCDirector sharedDirector];
 	
-	director_.wantsFullScreenLayout = YES;
+	director_.wantsFullScreenLayout = NO;
 	
 	// Display FSP and SPF
 	[director_ setDisplayStats:YES];

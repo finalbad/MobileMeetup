@@ -28,6 +28,14 @@
 	GLESDebugDraw *m_debugDraw;		// strong ref
 }
 
+typedef enum {
+    HDJShaderTypeRegular,
+    HDJShaderTypeInvert,
+    HDJShaderTypeGrayscale,
+} HDJShaderType;
+
+@property (nonatomic) CCSprite *bigSprite;
+
 // returns a CCScene that contains the HelloWorldLayer as the only child
 +(CCScene *) scene;
 

@@ -184,6 +184,8 @@
 		79EC256316284871005F597D /* HDJGrayscaleShader.m in Sources */ = {isa = PBXBuildFile; fileRef = 79EC256216284871005F597D /* HDJGrayscaleShader.m */; };
 		79EC256716284A93005F597D /* FV-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 79EC256516284A93005F597D /* FV-hd.png */; };
 		79EC256816284A93005F597D /* FV.png in Resources */ = {isa = PBXBuildFile; fileRef = 79EC256616284A93005F597D /* FV.png */; };
+		79EC256B16285505005F597D /* HDJInvertShader.m in Sources */ = {isa = PBXBuildFile; fileRef = 79EC256A16285504005F597D /* HDJInvertShader.m */; };
+		79EC256F16285EB3005F597D /* CCNode+SFGestureRecognizers.m in Sources */ = {isa = PBXBuildFile; fileRef = 79EC256E16285EB2005F597D /* CCNode+SFGestureRecognizers.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -552,6 +554,11 @@
 		79EC256216284871005F597D /* HDJGrayscaleShader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDJGrayscaleShader.m; sourceTree = "<group>"; };
 		79EC256516284A93005F597D /* FV-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "FV-hd.png"; path = "Resources/FV-hd.png"; sourceTree = "<group>"; };
 		79EC256616284A93005F597D /* FV.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FV.png; path = Resources/FV.png; sourceTree = "<group>"; };
+		79EC256916285504005F597D /* HDJInvertShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDJInvertShader.h; sourceTree = "<group>"; };
+		79EC256A16285504005F597D /* HDJInvertShader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDJInvertShader.m; sourceTree = "<group>"; };
+		79EC256C1628553A005F597D /* HDJMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDJMacros.h; sourceTree = "<group>"; };
+		79EC256D16285EB2005F597D /* CCNode+SFGestureRecognizers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CCNode+SFGestureRecognizers.h"; sourceTree = "<group>"; };
+		79EC256E16285EB2005F597D /* CCNode+SFGestureRecognizers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CCNode+SFGestureRecognizers.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -612,10 +619,15 @@
 			children = (
 				79EC254716284492005F597D /* AppDelegate.h */,
 				79EC254816284492005F597D /* AppDelegate.mm */,
+				79EC256D16285EB2005F597D /* CCNode+SFGestureRecognizers.h */,
+				79EC256E16285EB2005F597D /* CCNode+SFGestureRecognizers.m */,
 				79EC255016284492005F597D /* GLES-Render.h */,
 				79EC255116284492005F597D /* GLES-Render.mm */,
 				79EC256116284871005F597D /* HDJGrayscaleShader.h */,
 				79EC256216284871005F597D /* HDJGrayscaleShader.m */,
+				79EC256916285504005F597D /* HDJInvertShader.h */,
+				79EC256A16285504005F597D /* HDJInvertShader.m */,
+				79EC256C1628553A005F597D /* HDJMacros.h */,
 				79EC254A16284492005F597D /* HelloWorldLayer.h */,
 				79EC254B16284492005F597D /* HelloWorldLayer.mm */,
 				79EC254D16284492005F597D /* IntroLayer.h */,
@@ -1381,6 +1393,8 @@
 				79EC255216284492005F597D /* GLES-Render.mm in Sources */,
 				79EC255516284492005F597D /* PhysicsSprite.mm in Sources */,
 				79EC256316284871005F597D /* HDJGrayscaleShader.m in Sources */,
+				79EC256B16285505005F597D /* HDJInvertShader.m in Sources */,
+				79EC256F16285EB3005F597D /* CCNode+SFGestureRecognizers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1402,7 +1416,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1421,7 +1435,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

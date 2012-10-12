@@ -8,11 +8,15 @@
 
 // Import the interfaces
 #import "HelloWorldLayer.h"
+#import "HDJGrayscaleShader.h"
+#import "HDJInvertShader.h"
 
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
 
 #import "PhysicsSprite.h"
+
+#import "CCNode+SFGestureRecognizers.h"
 
 enum {
 	kTagParentNode = 1,
@@ -52,13 +56,19 @@ enum {
 		
 		self.isTouchEnabled = YES;
 		self.isAccelerometerEnabled = YES;
-		CGSize s = [CCDirector sharedDirector].winSize;
-		
+        CGSize size = UIScreen.mainScreen.bounds.size;
+        CGSize s = (CGSize){1136, 640};
+
+//		CGSize s = (CGSize){size.height, size.width};
+//		CGSize s = size;
+        self.contentSize = s;
+		self.position = ccp(100, 0);
+        self.anchorPoint = ccp(0, 0);
 		// init physics
 		[self initPhysics];
 		
 		// create reset button
-		[self createMenu];
+		[self createBigSprite];
 		
 		//Set up sprite
 		
@@ -73,7 +83,7 @@ enum {
 #endif
 		[self addChild:parent z:0 tag:kTagParentNode];
 		
-//		
+//
 //		[self addNewSpriteAtPosition:ccp(s.width/2, s.height/2)];
 		
 		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Tap screen" fontName:@"Marker Felt" fontSize:32];
@@ -82,8 +92,21 @@ enum {
 		label.position = ccp( s.width/2, s.height-50);
 		
 		[self scheduleUpdate];
+        
+        UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeLeft)];
+        swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+        [self addGestureRecognizer:swipeLeft];
+        [swipeLeft release];
+
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
+        [self addGestureRecognizer:tap];
+        [tap release];
 	}
 	return self;
+}
+
+- (void)tap;
+{
 }
 
 -(void) dealloc
@@ -97,7 +120,9 @@ enum {
 	[super dealloc];
 }	
 
--(void) createMenu
+
+
+-(void) createBigSprite
 {
 
     UIImage *image = [UIImage imageNamed:@"FV.png"];
@@ -110,7 +135,6 @@ enum {
 	NSLog(@"width: %f, height: %f", size.width, size.height);
     CCLOG(@"Add sprite %0.2f x %02.f",p.x,p.y);
 	CCNode *parent = [self getChildByTag:kTagParentNode];
-	
     
     CGFloat scale = [CCDirector sharedDirector].contentScaleFactor;
     
@@ -151,10 +175,15 @@ enum {
 	
 	[sprite setPhysicsBody:body];
     
-    
-    
-    
     [self addChild:sprite];
+    
+    self.bigSprite = sprite;
+    
+}
+
+- (void)swipeLeft;
+{
+    NSLog(@"left");
 }
 
 -(void) initPhysics
@@ -282,16 +311,51 @@ enum {
 	world->Step(dt, velocityIterations, positionIterations);	
 }
 
+- (void)updateSprite:(CCSprite *)sprite withShaderType:(HDJShaderType)shaderType;
+{
+
+    
+    switch (shaderType) {
+      case HDJShaderTypeGrayscale:
+        sprite.shaderProgram = [HDJGrayscaleShader loadShader];
+        break;
+
+      case HDJShaderTypeInvert:
+        sprite.shaderProgram = [HDJInvertShader loadShader];
+        break;
+        
+      default:
+		sprite.shaderProgram = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionTextureColor];
+        break;
+    }
+    
+
+}
+
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	//Add a new body/atlas sprite at the touched location
-	for( UITouch *touch in touches ) {
-		CGPoint location = [touch locationInView: [touch view]];
-		
-		location = [[CCDirector sharedDirector] convertToGL: location];
-		
-		[self addNewSpriteAtPosition: location];
-	}
+
+//    if (touches.count == 2){
+//        [self updateSprite:self.bigSprite withShaderType:HDJShaderTypeGrayscale];
+//        return;
+//    }
+//    else if (touches.count == 3){
+//        [self updateSprite:self.bigSprite withShaderType:HDJShaderTypeInvert];
+//        return;
+//    }
+//    else if (touches.count == 4){
+//        [self updateSprite:self.bigSprite withShaderType:HDJShaderTypeRegular];
+//        return;
+//    }
+//
+//	//Add a new body/atlas sprite at the touched location
+//	for( UITouch *touch in touches ) {
+//		CGPoint location = [touch locationInView: [touch view]];
+//		
+//		location = [[CCDirector sharedDirector] convertToGL: location];
+//		
+//		[self addNewSpriteAtPosition: location];
+//	}
 }
 
 #pragma mark GameKit delegate

@@ -1,17 +1,16 @@
 //
-//  HDJGrayscaleShader.m
+//  HDJInvertShader.m
 //  Shader-iOS
 //
 //  Created by Joseph Kim on 10/12/12.
 //
 //
 
-#import "HDJGrayscaleShader.h"
-#import "cocos2d.h"
+#import "HDJInvertShader.h"
 #import "HDJMacros.h"
+#import "cocos2d.h"
 
-@implementation HDJGrayscaleShader
-
+@implementation HDJInvertShader
 + (CCGLProgram *)loadShader;
 {
 
@@ -33,19 +32,17 @@
         }
     );
     
-    NSString *fragmentShader = String(
+    NSString *fragmentShader =  String(
         precision highp float;
-
         varying highp vec2 v_texCoord;
         uniform sampler2D u_texture;
-        const highp vec3 W = vec3(0.2125, 0.7154, 0.0721);
-
+        
         void main()
         {
             vec4 color = texture2D(u_texture, v_texCoord);
-            float luminance = dot(color.rgb, W);
-            gl_FragColor = vec4(vec3(luminance), color.a);
+            gl_FragColor = vec4((1.0 - color.rgb), color.a);
         }
+        
     );
 
     #define ShaderKey @"HDJGrayscaleShader"
@@ -66,6 +63,5 @@
     return shader;
 
 }
-
 
 @end
