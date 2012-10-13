@@ -1,0 +1,269 @@
+#!/usr/local/bin/node
+
+/*
+   Copyright 2011 Happy Dojo, LLC
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/            
+
+/////////////////////////////////////////////////////////////////////////////
+// Module Setup
+/////////////////////////////////////////////////////////////////////////////
+
+var fs = require('fs');
+var child_process = require('child_process');
+var assert = require('assert');
+var path = require('path');
+var findAllJs = path.basename(__filename) === 'js-watch-n-run';
+
+findAllJs = true;
+
+var _ = require('underscore');
+
+/////////////////////////////////////////////////////////////////////////////
+// Utilities
+/////////////////////////////////////////////////////////////////////////////
+
+/** * Take varargs and stringify them
+ */
+function stringify(var_args) {
+  var str = '';
+  for(var i = 0; i < arguments.length; i++) {
+    var obj = arguments[i];
+    if (typeOf(obj) == 'string') {
+      str += obj;
+    }
+    else {
+      str += JSON.stringify(obj, null, 2);
+    }
+  }
+  return str;
+}
+
+function debug(var_args) {
+  var str = stringify.apply(null, arguments);
+  process.stderr.write(str + '\n');
+}
+
+function typeOf(value) {
+  var s = typeof value;
+  if (s === 'object') {
+    if (value) {
+      if (value instanceof Array) {
+        s = 'array';
+      }
+    }
+    else {
+      s = 'null';
+    }
+  }
+  return s;
+}
+
+/////////////////////////////////////////////////////////////////////////////
+// RunOnUpdate
+/////////////////////////////////////////////////////////////////////////////
+
+function RunOnUpdate(argv){
+  var self = this;
+  if (!(self instanceof RunOnUpdate)){
+    throw new Error('"this" is not properly bound.  Make sure to use the new operator.');
+  }
+  
+  assert.ok(argv, 'argv must be defined');
+  
+  self.argv = argv;
+  self.cmdArgs = [];
+  self.child = null;
+  self.makeCmd();
+  self.determineWatchFiles();
+}
+
+function killChild(){
+  var self = this;
+  var child = self.child;
+  if (child) {
+    child.kill('SIGTERM');
+  }
+}
+
+function run(){
+
+  var self = this;
+  if (self.child){
+    self.rerun = true;
+    self.killChild();
+    return;
+  }
+  
+  self.rerun = false;
+  
+  var cmd = self.cmd;
+  var cmdArgs = self.cmdArgs;
+  var children = self.children;
+    
+debug('--------------------------------------------------------------------------------------');
+  debug('[Running Command: ', cmd + ' ' + cmdArgs.join(' '), ']');  debug('--------------------------------------------------------------------------------------');
+  
+  var child = self.child = child_process.spawn(cmd, cmdArgs, {stdio: 'inherit'});
+  child.on('exit', function(code, signal){
+    debug('Child process exited. Code: ', code, ' Signal: ', signal);
+    self.child = null;
+    if (self.rerun || code == 2) {
+      self.run();
+    }
+  });
+
+}
+
+function determineWatchFiles(){
+  var self = this;
+  var argv = self.argv;
+  var watchFiles = self.watchFiles = [];
+
+  if (argv[2].indexOf('.js') != -1){
+    // watch base script
+    watchFiles.push(argv[2]);
+  }
+
+
+  if (findAllJs){
+    var findProcess = child_process.exec('find . -name "*.js*"',
+      function (error, stdout, stderr) {
+        stdout.split('\n').forEach(function(filePath){
+          if (filePath){              
+            watchFiles.push(filePath);
+          }
+        });
+      
+        self.run();
+        self.watch();
+    });        
+  } 
+  else {
+    var watchIndex = argv.indexOf('--watch');
+    var start = 3;
+    if (watchIndex !== -1){
+      argv.slice(start).forEach(
+        function(element, i){
+          watchFiles.push(element);
+        }
+      );
+    } 
+
+    console.log('watchFiles: ', watchFiles);
+  
+    self.run();
+    self.watch();
+  }
+}
+
+function makeCmd(){
+  var self = this;
+  var argv = self.argv;
+  var cmdArgs = self.cmdArgs = [];
+  var cmd = null;
+
+  // Invoke node if a js file
+  if (argv[2].indexOf('.js') != -1){
+    cmd = 'node';
+    cmdArgs.push(argv[2]);
+  }
+  else {
+    cmd = argv[2];
+  }
+  
+  var watchIndex = argv.indexOf('--watch');
+  var len = argv.length;
+  if (watchIndex != -1){
+    len = watchIndex;
+  }                
+  argv.slice(3, len).forEach(function(element){
+     cmdArgs.push(element);
+  });
+
+  self.cmd = cmd;    
+}
+
+function watch(){
+  var self = this;
+  var watchInterval = self.watchInterval;
+  var watchFiles = self.watchFiles;
+
+  if (!watchFiles || watchFiles.length == 0){
+    var idle = function(){
+      setTimeout(idle, 1000);
+    }
+    setTimeout(idle, 1000);
+  }
+  
+  watchFiles.forEach(function(file){
+    fs.watchFile(file, {interval: watchInterval}, function(curr, prev) {
+      if (curr.mtime.valueOf() != prev.mtime.valueOf() ||
+          curr.ctime.valueOf() != prev.ctime.valueOf()) {
+        self.run();
+      }
+    });
+  });
+}
+
+RunOnUpdate.prototype.determineWatchFiles = determineWatchFiles;
+RunOnUpdate.prototype.killChild = killChild;
+RunOnUpdate.prototype.makeCmd = makeCmd;
+RunOnUpdate.prototype.run = run;
+RunOnUpdate.prototype.watch = watch;
+RunOnUpdate.prototype.watchInterval = 200;
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Unit Tests
+/////////////////////////////////////////////////////////////////////////////
+
+function unitTest(){
+}
+
+/////////////////////////////////////////////////////////////////////////////
+// Main
+/////////////////////////////////////////////////////////////////////////////
+
+function main(){
+  // debug('process.argv: ', process.argv);
+  if (process.argv.length <= 2){
+    debug('\nUsage:   watch-n-run [options] <shell-command-to-run> <list-of-files-to-watch|...>');
+    debug('  Example: watch-n-run narrative-generate.js --watch  narrative-input.txt');
+    debug('    - Re-executes narrative-generate.js when narrative-input.txt is modified.');
+    debug('  Example: watch-n-run test-server.js --watch `find . --name "*.js"`');
+    debug('    - Re-executes test-server.js when any file matching the pattern is found in any subdirectory of the current directory.\n');
+    process.exit(1);
+  }                 
+  
+  var runner = new RunOnUpdate(process.argv);
+}      
+
+/////////////////////////////////////////////////////////////////////////////
+// Exports
+/////////////////////////////////////////////////////////////////////////////    
+
+exports.RunOnUpdate = RunOnUpdate;
+exports.debug = debug;
+exports.stringify = stringify;
+exports.typeOf = typeOf;
+
+/////////////////////////////////////////////////////////////////////////////
+// Run as application?
+/////////////////////////////////////////////////////////////////////////////
+
+if (require.main === module){
+  // unitTest();
+  main();
+}       
