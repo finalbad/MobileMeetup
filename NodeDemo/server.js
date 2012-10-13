@@ -1,37 +1,58 @@
-// Include libraries.
+// Include libraries:
 var http = require('http');
 var util = require('util');
 var fs = require('fs');
 var debug = require('./happydojo-util').debug;
 
+// Configuration options:
 var listenOnPort = 7373;
 
 var appHtmlPath = './client.html';
 var appJsPath = './client.js';
 var appCssPath = './client.css';
 
+// Global variables:
+
+// Registry of all currently-connected clients.
+var clients = {};
+
+// Registry of points in the current drawing.
+var currentPoints = [];
+
+// Start up HTTP server.
 var httpServer = http.createServer(handleRequest);
+debug('Starting server.')
 
 httpServer.listen(listenOnPort, function(err) {
   if (err) {
     debug(err);
   }
+
+  debug('Listening for connections on port ', listenOnPort);
+
 });
 
-var clients = {};
-
+// Create an entry for the client registry.
 function makeClient(identity) {
   return {
-    id: identity,
-    name: 'Anon' + parseInt(Math.random() * 100),
-    requestCount: 0,
-    messageQueue: [],
-    response: null
+    // Some string that the client uses to identify itself.
+    id: identity, 
+
+    // Default name.
+    name: 'Anon' + parseInt(Math.random() * 100), 
+    
+    // Count of requests made.
+    requestCount: 0, 
+    
+    // Queue of messages to send out.
+    messageQueue: [], 
+
+    // Pointer to the 'response' object from an active HTTP connection
+    response: null 
   };
 }
 
-var currentPoints = [];
-
+// Entry point the HTTP server uses for handling each request.
 function handleRequest(req, res) {
   var endpoints = {
     '/': handleAppHtml,
@@ -46,6 +67,8 @@ function handleRequest(req, res) {
     '/point': handlePoint
   };
 
+  // Determine the client's id, if it has one, and look up the 'client' object
+  // which represents it.
   var id = req.headers['user-identity'];
   if (id) {
     var client = clients[id];
@@ -56,7 +79,9 @@ function handleRequest(req, res) {
     client.requestCount++;
   }
 
+  // Lookup and call a handler for this request.
   callHandler();
+
 
   function callHandler() {
     var handler = endpoints[req.url];
@@ -221,7 +246,6 @@ function handleRequest(req, res) {
           cb('Error parsing incoming JSON data');
         }
       });
-
   }
 }
 

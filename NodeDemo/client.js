@@ -40,6 +40,7 @@ var identity;
 var mousedown;
 var context;
 
+// Invoke main after objects have been set up.
 main();
 
 function addEventListeners() {
