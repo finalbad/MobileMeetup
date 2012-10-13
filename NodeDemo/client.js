@@ -25,10 +25,8 @@ var $ = {
   outputContainer: null
 };
 
-
-var pointSendInterval = 10;
+// Timeout for requests.
 var xhrTimeoutSecs = 5;
-var pointsToSendQueue = [];
 
 var css = {
   standard: 'standardOutput',
@@ -36,13 +34,22 @@ var css = {
   log: 'standardOutput'
 };
 
+var brushRadius = 3;
+var brushColor = 'rgba(0, 0, 64, 0.4)';
+
+// Holds client's identifier (should probably use a cookie instead).
 var identity;
+
+// Is the mouse button down?
 var mousedown;
+
+// Graphics context for drawing to the canvas.
 var context;
 
 // Invoke main after objects have been set up.
 main();
 
+// Adds event listeners to interesting objects in the DOM.
 function addEventListeners() {
   $.messageEntry.addEventListener('keypress', function(event) {
     if (event.keyCode == 13) {
@@ -52,16 +59,19 @@ function addEventListeners() {
 
   }, false);
 
+  // Adjust things that can't be targeted by CSS when the window resizes.
   window.addEventListener('resize', function(event) {
     adjustElementPositions();
   });
 
+  // Send user's name when 'Enter' is pressed.
   $.namebox.addEventListener('keypress', function(event) {
     if (event.keyCode == 13) {
       jsonRequest('/name', 'POST', {name: $.namebox.value});
     }
   });
 
+  // Track mouse movement over the canvas.
   $.drawing.addEventListener('mousemove', function(event) {
     var x = event.pageX - $.drawing.offsetLeft
     var y = event.pageY - $.drawing.offsetTop;
@@ -72,14 +82,17 @@ function addEventListeners() {
     }
   });
 
+  // Clear the canvas when the Clear Canvas button is clicked.
   $.clearCanvasButton.addEventListener('click', function(event) {
     jsonRequest('/clearDrawing', 'GET');
   });
 
+  // Prevent selection of things when dragging with the mouse down.
   $.body.addEventListener('selectstart', function(event) {
     event.preventDefault();
   });
 
+  // Track mouse button up/down status.
   $.body.addEventListener('mouseup', function(event) {
     mousedown = false;
   });
@@ -88,16 +101,19 @@ function addEventListeners() {
   });
 }
 
+// Send a point to the server.
 function postPoint(x, y) {
   jsonRequest('/point', 'POST', {point: {x: x, y: y} }, null);
 }
 
+// Draw a point on screen.
 function drawPoint(x, y) {
-  var gradient = context.createRadialGradient(x, y, 1, x, y, 3);
-  gradient.addColorStop(0, 'rgba(0, 0, 0, 0.5)');
+  // Generate a radial gradient to make the point look nice.
+  var gradient = context.createRadialGradient(x, y, 1, x, y, brushRadius);
+  gradient.addColorStop(0, brushColor);
   gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
   context.fillStyle = gradient;
-  context.fillRect(x - 5, y - 5, 10, 10);
+  context.fillRect(x - brushRadius + 1, y - brushRadius + 1, brushRadius * 2 + 2, brushRadius * 2 + 2);
 }
 
 function bindCanvasContext() {
