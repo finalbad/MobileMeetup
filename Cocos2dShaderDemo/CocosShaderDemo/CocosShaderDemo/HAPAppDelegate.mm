@@ -8,6 +8,7 @@
 
 #import "HAPAppDelegate.h"
 #import "cocos2d.h"
+#import "HAPShaderTestLayer.h"
 
 @implementation HAPAppDelegate
 
@@ -79,8 +80,9 @@
 //	[director_ pushScene: [HelloWorldLayer scene]];
 
     CCScene *scene = [[CCScene alloc] init];
-    CCLayer *layer = [[CCLayer alloc] init];
-    layer.isTouchEnabled = YES;
+    HAPShaderTestLayer *layer = [[HAPShaderTestLayer alloc] init];
+//    CCLayer *layer = [[CCLayer alloc] init];
+//    layer.isTouchEnabled = YES;
     [scene addChild:layer];
     [director_ pushScene: scene];
 	

@@ -24,6 +24,9 @@
 		79292AF91628EDB600227780 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79292AEE1628EDB600227780 /* Icon-Small@2x.png */; };
 		79292AFA1628EDB600227780 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 79292AEF1628EDB600227780 /* Icon.png */; };
 		79292AFB1628EDB600227780 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79292AF01628EDB600227780 /* Icon@2x.png */; };
+		79292AFF1628EE1300227780 /* HAPShader.m in Sources */ = {isa = PBXBuildFile; fileRef = 79292AFE1628EE1300227780 /* HAPShader.m */; };
+		79292B051628EF3C00227780 /* HAPShaderGrayscale.m in Sources */ = {isa = PBXBuildFile; fileRef = 79292B041628EF3C00227780 /* HAPShaderGrayscale.m */; };
+		79292B081628F10100227780 /* HAPShaderTestLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 79292B071628F10100227780 /* HAPShaderTestLayer.m */; };
 		79EC25801628E95F005F597D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79EC257F1628E95F005F597D /* UIKit.framework */; };
 		79EC25821628E95F005F597D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79EC25811628E95F005F597D /* Foundation.framework */; };
 		79EC25841628E95F005F597D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79EC25831628E95F005F597D /* CoreGraphics.framework */; };
@@ -503,6 +506,13 @@
 		79292AEE1628EDB600227780 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
 		79292AEF1628EDB600227780 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		79292AF01628EDB600227780 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		79292AFD1628EE1300227780 /* HAPShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HAPShader.h; sourceTree = "<group>"; };
+		79292AFE1628EE1300227780 /* HAPShader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HAPShader.m; sourceTree = "<group>"; };
+		79292B001628EE5B00227780 /* HAPMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HAPMacros.h; sourceTree = "<group>"; };
+		79292B031628EF3C00227780 /* HAPShaderGrayscale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HAPShaderGrayscale.h; sourceTree = "<group>"; };
+		79292B041628EF3C00227780 /* HAPShaderGrayscale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HAPShaderGrayscale.m; sourceTree = "<group>"; };
+		79292B061628F10100227780 /* HAPShaderTestLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HAPShaderTestLayer.h; sourceTree = "<group>"; };
+		79292B071628F10100227780 /* HAPShaderTestLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HAPShaderTestLayer.m; sourceTree = "<group>"; };
 		79EC257B1628E95F005F597D /* CocosShaderDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CocosShaderDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79EC257F1628E95F005F597D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		79EC25811628E95F005F597D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -545,6 +555,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		79292AFC1628EE0200227780 /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				79292AFD1628EE1300227780 /* HAPShader.h */,
+				79292AFE1628EE1300227780 /* HAPShader.m */,
+				79292B031628EF3C00227780 /* HAPShaderGrayscale.h */,
+				79292B041628EF3C00227780 /* HAPShaderGrayscale.m */,
+			);
+			name = Shaders;
+			sourceTree = "<group>";
+		};
 		79EC25701628E95F005F597D = {
 			isa = PBXGroup;
 			children = (
@@ -584,6 +605,10 @@
 			children = (
 				79EC258E1628E95F005F597D /* HAPAppDelegate.h */,
 				79EC258F1628E95F005F597D /* HAPAppDelegate.mm */,
+				79292B001628EE5B00227780 /* HAPMacros.h */,
+				79292B061628F10100227780 /* HAPShaderTestLayer.h */,
+				79292B071628F10100227780 /* HAPShaderTestLayer.m */,
+				79292AFC1628EE0200227780 /* Shaders */,
 				79EC25861628E95F005F597D /* Supporting Files */,
 			);
 			path = CocosShaderDemo;
@@ -1180,6 +1205,9 @@
 			files = (
 				79EC258C1628E95F005F597D /* main.m in Sources */,
 				79EC25901628E95F005F597D /* HAPAppDelegate.mm in Sources */,
+				79292AFF1628EE1300227780 /* HAPShader.m in Sources */,
+				79292B051628EF3C00227780 /* HAPShaderGrayscale.m in Sources */,
+				79292B081628F10100227780 /* HAPShaderTestLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
