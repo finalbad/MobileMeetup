@@ -164,8 +164,8 @@ GLint uniforms[NUM_UNIFORMS];
                                                             100.0f);
     
     GLKMatrix4 modelViewMatrix = GLKMatrix4Identity;
-    modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, _rotationX, 1.0f, 0.0f, 1.0f);
-    modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, _rotationY, 0.0f, 1.0f, 1.0f);
+    modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, _rotationX, 1.0f, 0.0f, 0.0f);
+    modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, _rotationY, 0.0f, 1.0f, 0.0f);
     
     _modelViewProjectionMatrix = GLKMatrix4Multiply(projectionMatrix, modelViewMatrix);
 }
@@ -201,10 +201,10 @@ GLint uniforms[NUM_UNIFORMS];
                   [touch previousLocationInView:touch.view].x;
     float distY = [touch locationInView:touch.view].y -
                 [touch previousLocationInView:touch.view].y;
-    distX *= -0.01;
-    distY *= -0.01;
-    _rotationX += distX;
-    _rotationY += distY;
+    distX *= -0.005;
+    distY *= -0.005;
+    _rotationX += distY;
+    _rotationY += distX;
 }
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
