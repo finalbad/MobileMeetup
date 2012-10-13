@@ -1,0 +1,70 @@
+body {
+  background-color: #eee;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif, helvetica, arial;
+}
+
+.column {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#column1 {  
+  border-right: 1px solid black;
+}
+
+#column2 {
+  left: 50%;
+  height: 100%;
+}
+
+#column2 .content {
+  height: 50%;
+  overflow: auto;
+}
+
+.column .content {
+  padding: 10;
+}
+
+.scrollable {
+  scroll: vertical;
+}
+
+input, textarea {
+  font-size: 10pt;
+}
+
+#entryContainer {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+}
+
+#outputContainer {
+  padding: 10px;
+}
+
+#messageEntry {
+  width: 100%;
+}
+
+.standardOutput {
+  border: 1px solid #bbb;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
+#drawingContainer {
+  margin: 20;
+  text-align: center;
+}
+
+#drawing {
+  border: 1px solid black;
+  cursor: crosshair;
+}
