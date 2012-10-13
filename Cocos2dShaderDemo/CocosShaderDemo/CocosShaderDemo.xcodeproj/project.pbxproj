@@ -26,8 +26,15 @@
 		79292AFB1628EDB600227780 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79292AF01628EDB600227780 /* Icon@2x.png */; };
 		79292AFF1628EE1300227780 /* HAPShader.m in Sources */ = {isa = PBXBuildFile; fileRef = 79292AFE1628EE1300227780 /* HAPShader.m */; };
 		79292B051628EF3C00227780 /* HAPShaderGrayscale.m in Sources */ = {isa = PBXBuildFile; fileRef = 79292B041628EF3C00227780 /* HAPShaderGrayscale.m */; };
-		79292B081628F10100227780 /* HAPShaderTestLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 79292B071628F10100227780 /* HAPShaderTestLayer.m */; };
+		79292B081628F10100227780 /* HAPShaderTestLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 79292B071628F10100227780 /* HAPShaderTestLayer.mm */; };
 		79292B0B1628F31B00227780 /* HAPShaderInvert.m in Sources */ = {isa = PBXBuildFile; fileRef = 79292B0A1628F31B00227780 /* HAPShaderInvert.m */; };
+		79292B101628F6D400227780 /* CCNode+SFGestureRecognizers.m in Sources */ = {isa = PBXBuildFile; fileRef = 79292B0F1628F4BE00227780 /* CCNode+SFGestureRecognizers.m */; };
+		79292B131628F76700227780 /* HAPSwipeSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 79292B121628F76700227780 /* HAPSwipeSprite.m */; };
+		79292B551628FCAB00227780 /* Image1.png in Resources */ = {isa = PBXBuildFile; fileRef = 79292B501628FCAB00227780 /* Image1.png */; };
+		79292B561628FCAB00227780 /* Image2.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 79292B511628FCAB00227780 /* Image2.jpeg */; };
+		79292B571628FCAB00227780 /* Image3.png in Resources */ = {isa = PBXBuildFile; fileRef = 79292B521628FCAB00227780 /* Image3.png */; };
+		79292B581628FCAB00227780 /* Image4.png in Resources */ = {isa = PBXBuildFile; fileRef = 79292B531628FCAB00227780 /* Image4.png */; };
+		79292B591628FCAB00227780 /* Image5.png in Resources */ = {isa = PBXBuildFile; fileRef = 79292B541628FCAB00227780 /* Image5.png */; };
 		79EC25801628E95F005F597D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79EC257F1628E95F005F597D /* UIKit.framework */; };
 		79EC25821628E95F005F597D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79EC25811628E95F005F597D /* Foundation.framework */; };
 		79EC25841628E95F005F597D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79EC25831628E95F005F597D /* CoreGraphics.framework */; };
@@ -513,9 +520,18 @@
 		79292B031628EF3C00227780 /* HAPShaderGrayscale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HAPShaderGrayscale.h; sourceTree = "<group>"; };
 		79292B041628EF3C00227780 /* HAPShaderGrayscale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HAPShaderGrayscale.m; sourceTree = "<group>"; };
 		79292B061628F10100227780 /* HAPShaderTestLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HAPShaderTestLayer.h; sourceTree = "<group>"; };
-		79292B071628F10100227780 /* HAPShaderTestLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HAPShaderTestLayer.m; sourceTree = "<group>"; };
+		79292B071628F10100227780 /* HAPShaderTestLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HAPShaderTestLayer.mm; sourceTree = "<group>"; };
 		79292B091628F31B00227780 /* HAPShaderInvert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HAPShaderInvert.h; sourceTree = "<group>"; };
 		79292B0A1628F31B00227780 /* HAPShaderInvert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HAPShaderInvert.m; sourceTree = "<group>"; };
+		79292B0E1628F4BE00227780 /* CCNode+SFGestureRecognizers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CCNode+SFGestureRecognizers.h"; sourceTree = "<group>"; };
+		79292B0F1628F4BE00227780 /* CCNode+SFGestureRecognizers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CCNode+SFGestureRecognizers.m"; sourceTree = "<group>"; };
+		79292B111628F76700227780 /* HAPSwipeSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HAPSwipeSprite.h; sourceTree = "<group>"; };
+		79292B121628F76700227780 /* HAPSwipeSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HAPSwipeSprite.m; sourceTree = "<group>"; };
+		79292B501628FCAB00227780 /* Image1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Image1.png; sourceTree = "<group>"; };
+		79292B511628FCAB00227780 /* Image2.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Image2.jpeg; sourceTree = "<group>"; };
+		79292B521628FCAB00227780 /* Image3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Image3.png; sourceTree = "<group>"; };
+		79292B531628FCAB00227780 /* Image4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Image4.png; sourceTree = "<group>"; };
+		79292B541628FCAB00227780 /* Image5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Image5.png; sourceTree = "<group>"; };
 		79EC257B1628E95F005F597D /* CocosShaderDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CocosShaderDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79EC257F1628E95F005F597D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		79EC25811628E95F005F597D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -608,11 +624,15 @@
 		79EC25851628E95F005F597D /* CocosShaderDemo */ = {
 			isa = PBXGroup;
 			children = (
+				79292B0E1628F4BE00227780 /* CCNode+SFGestureRecognizers.h */,
+				79292B0F1628F4BE00227780 /* CCNode+SFGestureRecognizers.m */,
 				79EC258E1628E95F005F597D /* HAPAppDelegate.h */,
 				79EC258F1628E95F005F597D /* HAPAppDelegate.mm */,
 				79292B001628EE5B00227780 /* HAPMacros.h */,
 				79292B061628F10100227780 /* HAPShaderTestLayer.h */,
-				79292B071628F10100227780 /* HAPShaderTestLayer.m */,
+				79292B071628F10100227780 /* HAPShaderTestLayer.mm */,
+				79292B111628F76700227780 /* HAPSwipeSprite.h */,
+				79292B121628F76700227780 /* HAPSwipeSprite.m */,
 				79292AFC1628EE0200227780 /* Shaders */,
 				79EC25861628E95F005F597D /* Supporting Files */,
 			);
@@ -622,6 +642,11 @@
 		79EC25861628E95F005F597D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				79292B501628FCAB00227780 /* Image1.png */,
+				79292B511628FCAB00227780 /* Image2.jpeg */,
+				79292B521628FCAB00227780 /* Image3.png */,
+				79292B531628FCAB00227780 /* Image4.png */,
+				79292B541628FCAB00227780 /* Image5.png */,
 				79292AE61628EDB600227780 /* blocks.png */,
 				79292AE71628EDB600227780 /* Default-Landscape~ipad.png */,
 				79292AE81628EDB600227780 /* fps_images-hd.png */,
@@ -1198,6 +1223,11 @@
 				79292AF91628EDB600227780 /* Icon-Small@2x.png in Resources */,
 				79292AFA1628EDB600227780 /* Icon.png in Resources */,
 				79292AFB1628EDB600227780 /* Icon@2x.png in Resources */,
+				79292B551628FCAB00227780 /* Image1.png in Resources */,
+				79292B561628FCAB00227780 /* Image2.jpeg in Resources */,
+				79292B571628FCAB00227780 /* Image3.png in Resources */,
+				79292B581628FCAB00227780 /* Image4.png in Resources */,
+				79292B591628FCAB00227780 /* Image5.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1212,8 +1242,10 @@
 				79EC25901628E95F005F597D /* HAPAppDelegate.mm in Sources */,
 				79292AFF1628EE1300227780 /* HAPShader.m in Sources */,
 				79292B051628EF3C00227780 /* HAPShaderGrayscale.m in Sources */,
-				79292B081628F10100227780 /* HAPShaderTestLayer.m in Sources */,
+				79292B081628F10100227780 /* HAPShaderTestLayer.mm in Sources */,
 				79292B0B1628F31B00227780 /* HAPShaderInvert.m in Sources */,
+				79292B101628F6D400227780 /* CCNode+SFGestureRecognizers.m in Sources */,
+				79292B131628F76700227780 /* HAPSwipeSprite.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1325,6 +1357,7 @@
 				GCC_PREFIX_HEADER = "CocosShaderDemo/CocosShaderDemo-Prefix.pch";
 				INFOPLIST_FILE = "CocosShaderDemo/CocosShaderDemo-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "../cocos2d-iphone/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1336,6 +1369,7 @@
 				GCC_PREFIX_HEADER = "CocosShaderDemo/CocosShaderDemo-Prefix.pch";
 				INFOPLIST_FILE = "CocosShaderDemo/CocosShaderDemo-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "../cocos2d-iphone/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

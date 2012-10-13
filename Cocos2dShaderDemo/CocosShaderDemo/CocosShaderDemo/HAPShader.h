@@ -7,9 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "cocos2d.h"
 
 @interface HAPShader : NSObject
 
++ (CCGLProgram *)loadShader;
 - (NSString *)shaderName;
 - (NSString *)vertexShader;
 - (NSString *)fragmentShader;

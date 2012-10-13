@@ -28,7 +28,7 @@
         [shader link];
         [shader updateUniforms];
         
-        [[CCShaderCache sharedShaderCache] addProgram:shader forKey:@"HDJGrayscaleShader"];
+        [[CCShaderCache sharedShaderCache] addProgram:shader forKey:shaderName];
     }
     return shader;
     
